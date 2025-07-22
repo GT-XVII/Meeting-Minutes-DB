@@ -1,0 +1,18 @@
+WMSB Charge Flow and Billing Scenarios
+Questions: How does the WMSB charge flow work end-to-end? Is it informational, posting relevant, or both? Does it require a separate device or is it just a charge along with different tariffs? What are the scenarios for billing WMSB (via supplier or direct to MSB)? How is the flag set and what does it trigger? Is the charge relevant for all types of services?
+Answers: The WMSB charge can be included in the energy invoice or handled separately, depending on the customer's choice. If included, it appears as a line item; if not, a flag is set and the charge is handled externally. The flag is set based on market communication messages (e.g., MAKO from DSO). The charge is a flat device rental fee, not consumption-based, and is relevant for all electricity-related services (including heat pumps, SLP Strom, RLM, etc.). No separate device is required; it is a service charge linked to the device. 1 2 3 4
+Technical Implementation and Data Handling
+Questions: Where is the flag set in the system? What triggers it? How is the service provider (WMSB) captured in technical master data? Can the process be simulated?
+Answers: The flag is set at the installation or POD level based on incoming market communication messages. If the WMSB is not included in the invoice, the flag is set and the charge is handled externally. The service provider (WMSB) should be captured in technical master data at the POD level. Simulation is possible if the rate is known, and proration can be handled by standard processes. 5 6 7 8
+Charge Applicability and Special Cases
+Questions: Is the WMSB charge relevant for all types of services (SLP Gas, SLP Strom, heating, heat pump, RLM)? Are there scenarios where no grid charges are paid?
+Answers: The charge is only relevant for electricity-related services (SLP Strom, heat pump, RLM, etc.), not for gas. There is a special case where no grid charges are paid, but this is not part of the standard WMSB scenario. 9 10
+Billing Transitions and Proration
+Questions: How is billing handled when a customer switches from supplier-billed to direct MSB-billed? How is proration managed?
+Answers: When a customer switches to direct MSB billing, a flag is set from the effective date, and proration is handled so that charges before the switch are billed by the supplier, and after the switch, they are not. This can be managed by standard processes. 11 12
+Clarifications and Process Details
+Questions: What message types are used for communication? How is the MSB identified? What happens if the flag is not set?
+Answers: The relevant message type is "quote" (not Ms. cons), and the MSB is identified by a unique ID in the message. If the flag is not set, the charge is billed manually. 13 14 15
+(Chat) Additional Clarifications
+Questions: Is the charge relevant for all types of services (SLP Gas, SLP Strom, heating, heat pump, RLM)?
+Answers: In the chat, it was stated that the charge is relevant for all types of services, but the transcript clarifies it is only for electricity-related services. 16 

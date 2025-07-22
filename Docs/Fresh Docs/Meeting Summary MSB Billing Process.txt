@@ -1,0 +1,75 @@
+Meeting Summary: MSB Billing Process Review & Implementation Planning
+Meeting Details
+Date: July 8, 2025
+Time: 13:41:45 CET – 15:27:32 CET
+Topic:
+The meeting focused on the MSB (Metering Service Billing) process, covering:
+The creation and management of MSB contracts
+Integration with device management
+Handling of price catalogs
+Implications of regulatory requirements on billing processes
+Setup of billing plans
+Handling of supplier responses
+Differentiation between MSB and VNB (Distribution System Operator) billing
+Participants:
+Bence Vetek
+Susanne Faber
+Daniel Oberle
+Dirk Neddermeier
+Swathika Sivakumar
+Anirban Sarkar
+Maria Teixeira Costa
+1. MSB Contract Creation and Supplier Handling
+The MSB contract is initiated when a new metering device (MME or IMS) is installed, triggering a master data update.
+The supplier has 6 to 8 working days to respond to the billing request:
+If the supplier accepts, they assume billing responsibility.
+If the supplier rejects, the MSB directly invoices the end customer.
+Billing begins immediately after contract creation, regardless of the supplier’s response, requiring close attention from the billing team.
+2. Communication and Customer Notification
+A welcome letter is sent to the end customer once the MSB contract is active, explaining the billing structure and applicable charges.
+An annual invoice follows, depending on the configured billing plan.
+3. Billing Plan Setup
+Two billing models are available:
+Rolling Billing Plan: Starts from the device installation date.
+Yearly Billing Plan: Starts from January 1st each year.
+Companies must apply one uniform model across all customers.
+4. Device Classification and Price Catalog
+Devices are categorized (e.g., MME, IMS) and mapped to price classifications, which determine billing rates.
+The price catalog contains:
+Standard device charges
+Additional components like transformer costs
+While some prices are defined by the business, most are legally regulated, with fixed upper limits under the Messstellenbetriebsgesetz.
+Accuracy in device classification and price mapping is critical; coordination with the device management team is required.
+The catalog must be reviewed and validated by the business team for compliance and feasibility.
+5. Process Integration and Trigger Mechanisms
+MSB contract creation or updates are triggered by:
+Device changes
+New customer registrations
+Master data updates
+The system must handle the creation, update, or delimitation of MSB contracts accordingly.
+Accurate master data management is essential to ensure billing stability.
+6. MSB Billing for VNB
+In scenarios involving IMS devices, a portion of the billing is assigned to the VNB (Distribution System Operator).
+If MSB and VNB are part of the same company, this internal billing and reconciliation is automated and ensures regulatory compliance.
+7. Regulatory Compliance
+The billing process must fully comply with the Messstellenbetriebsgesetz and related legal frameworks.
+Maximum price limits must not be exceeded.
+Faber emphasized the importance of compliance for audit readiness, noting that deviations could lead to auditor objections or regulatory issues.
+8. Simulation and Testing
+While billing teams do not commonly use simulations, the controlling and technical teams perform them to:
+Validate process stability
+Identify configuration issues
+Ensure invoice accuracy
+Bence and Swathika agreed simulations should be conducted before go-live.
+9. Clarifications and Open Questions
+Supplier Rejections: If a supplier rejects the billing responsibility, the MSB invoices the connection user directly.
+Master Data Change Effects: Questions were raised about how new data influences contract updates or terminations.
+10. Action Items
+ 
+Area	Action Item	Responsible
+MSB Process Documentation	Check if Level 4 process documentation exists within the Marco Team	Bence
+Price Catalog	Validate pricing entries with business team	Bence
+Device Mapping	Ensure accurate classification and price linkage with device team	Shared
+Simulation	Conduct simulations to test process stability	Swathika
+Regulatory Compliance	Review process to ensure legal alignment and audit readiness	Faber
+Follow-up Planning	Schedule further sessions to refine process steps	Implementation Team
