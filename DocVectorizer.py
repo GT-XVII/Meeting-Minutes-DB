@@ -1,14 +1,20 @@
 import os
 import shutil
-from langchain.document_loaders import TextLoader
+import json
+from datetime import datetime
+from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Qdrant
+from langchain_core.documents import Document
+from qdrant_client import QdrantClient
+from qdrant_client.http.models import Distance, VectorParams
 
 # === Config ===
-SOURCE_DIR = "docs"
-PROCESSED_DIR = "vectorized_docs"
-FAISS_INDEX_DIR = "faiss_index"
+SOURCE_DIR = "Docs/Fresh Docs"
+PROCESSED_DIR = "Docs/Vectorized Docs"
+QDRANT_PATH = "qdrant_local"
+COLLECTION_NAME = "document_vectors"
 
 # === Ensure processed dir exists ===
 os.makedirs(PROCESSED_DIR, exist_ok=True)
@@ -17,30 +23,64 @@ os.makedirs(PROCESSED_DIR, exist_ok=True)
 all_docs = []
 for filename in os.listdir(SOURCE_DIR):
     if filename.endswith(".txt"):
-        file_path = os.path.join(SOURCE_DIR, filename)
-        loader = TextLoader(file_path)
+        base_name = os.path.splitext(filename)[0]
+        txt_path = os.path.join(SOURCE_DIR, filename)
+        json_path = os.path.join(SOURCE_DIR, base_name + ".json")
+
+        # Load .txt content
+        loader = TextLoader(txt_path)
         documents = loader.load()
+
+        # Load .json metadata if it exists
+        metadata = {"source": filename}
+        if os.path.exists(json_path):
+            with open(json_path, "r", encoding="utf-8") as f:
+                try:
+                    loaded_meta = json.load(f)
+
+                    # Convert "date" to a timestamp (float)
+                    if "date" in loaded_meta:
+                        try:
+                            loaded_meta["date"] = datetime.strptime(loaded_meta["date"], "%d/%m/%Y").timestamp()
+                        except ValueError:
+                            print(f"[WARN] Invalid date format in {json_path}. Expected dd/mm/yyyy.")
+
+                    metadata.update(loaded_meta)
+
+                except json.JSONDecodeError:
+                    print(f"[WARN] Failed to parse metadata for {filename}")
+
+        # Attach metadata to each document
+        for doc in documents:
+            doc.metadata.update(metadata)
 
         # Split into chunks
         splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
         chunks = splitter.split_documents(documents)
         all_docs.extend(chunks)
 
-        # Move file to processed dir
-        shutil.move(file_path, os.path.join(PROCESSED_DIR, filename))
+        # Move processed files
+        shutil.move(txt_path, os.path.join(PROCESSED_DIR, filename))
+        if os.path.exists(json_path):
+            shutil.move(json_path, os.path.join(PROCESSED_DIR, os.path.basename(json_path)))
         print(f"Vectorized and moved: {filename}")
 
 # === Create embeddings ===
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-# === Create or update FAISS index ===
-try:
-    vectorstore = FAISS.load_local(FAISS_INDEX_DIR, embeddings)
-    print("Loaded existing FAISS index.")
-    vectorstore.add_documents(all_docs)
-except:
-    vectorstore = FAISS.from_documents(all_docs, embeddings)
-    print("Created new FAISS index.")
+# === Create Qdrant client and collection ===
+client = QdrantClient(path=QDRANT_PATH)
 
-vectorstore.save_local(FAISS_INDEX_DIR)
-print("Saved FAISS index.")
+if COLLECTION_NAME not in [col.name for col in client.get_collections().collections]:
+    client.recreate_collection(
+        collection_name=COLLECTION_NAME,
+        vectors_config=VectorParams(size=384, distance=Distance.COSINE),
+    )
+    print("Created new Qdrant collection.")
+else:
+    print("Using existing Qdrant collection.")
+
+# === Add documents to Qdrant ===
+vectorstore = Qdrant(client=client, collection_name=COLLECTION_NAME, embeddings=embeddings)
+vectorstore.add_documents(all_docs)
+print("Documents added to Qdrant.")
