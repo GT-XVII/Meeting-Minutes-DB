@@ -1,0 +1,70 @@
+[
+  {
+    "query": "Summarize what was discussed in the Sprint Planning this week",
+    "elapsed_sec": 0.025,
+    "retrieved": [
+      {
+        "doc_id": "d30697c65bf04c5ca02d07df242fc2f3",
+        "metadata": {
+          "source": "Meeting Minutes Daily Lot1&2 010825.txt",
+          "date_str": "01/08/2025",
+          "Meeting_type": "Daily Lot 1&2",
+          "date": 1754006400.0,
+          "_id": "d30697c65bf04c5ca02d07df242fc2f3",
+          "_collection_name": "document_vectors"
+        }
+      },
+      {
+        "doc_id": "dbe5df55d840477b933225539bcbc5a3",
+        "metadata": {
+          "source": "Stage Gate 3 Progress & Targets - 29072025.txt",
+          "date_str": "29/07/2025",
+          "Meeting_type": "Daily Lot 1&2",
+          "date": 1753747200.0,
+          "_id": "dbe5df55d840477b933225539bcbc5a3",
+          "_collection_name": "document_vectors"
+        }
+      },
+      {
+        "doc_id": "811ee7d52a8c45d7a521f84ae48118af",
+        "metadata": {
+          "source": "Daily Meeting Notes Lot1&2 - 28072025.txt",
+          "date_str": "28/07/2025",
+          "Meeting_type": "Daily Lot 1&2",
+          "date": 1753660800.0,
+          "_id": "811ee7d52a8c45d7a521f84ae48118af",
+          "_collection_name": "document_vectors"
+        }
+      },
+      {
+        "doc_id": "5daaff9aaaef4bb9b03468abd24abfae",
+        "metadata": {
+          "source": "Meeting Minutes LOT1 Daily 300725.txt",
+          "date_str": "30/07/2025",
+          "Meeting_type": "Daily Lot 1",
+          "date": 1753833600.0,
+          "_id": "5daaff9aaaef4bb9b03468abd24abfae",
+          "_collection_name": "document_vectors"
+        }
+      },
+      {
+        "doc_id": "0c1a0c7dd5f342c5800a7f3382e4100d",
+        "metadata": {
+          "source": "Meeting Minutes Daily Lot1&2 010825.txt",
+          "date_str": "01/08/2025",
+          "Meeting_type": "Daily Lot 1&2",
+          "date": 1754006400.0,
+          "_id": "0c1a0c7dd5f342c5800a7f3382e4100d",
+          "_collection_name": "document_vectors"
+        }
+      }
+    ],
+    "qrels": {
+      "d30697c65bf04c5ca02d07df242fc2f3": 3,
+      "dbe5df55d840477b933225539bcbc5a3": 2,
+      "811ee7d52a8c45d7a521f84ae48118af": 2,
+      "5daaff9aaaef4bb9b03468abd24abfae": 1,
+      "0c1a0c7dd5f342c5800a7f3382e4100d": 1
+    }
+  }
+]

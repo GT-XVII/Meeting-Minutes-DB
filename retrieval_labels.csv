@@ -1,0 +1,6 @@
+query_id,query,doc_rank,doc_id,source,date_str,Meeting_type,preview,label
+1,What was discussed about e net testing in the dailies,1,3df559cb16d447e9afcbd9054ddff371,Daily Lot 1&2 060825.txt,06/08/2025,Daily Lot 1&2,source=Daily Lot 1&2 060825.txt | date_str=06/08/2025 | Meeting_type=Daily Lot 1&2,2
+1,What was discussed about e net testing in the dailies,2,07429a13b4ca4d8fafe73e747785d52a,Meeting Minutes Daily Lot1&2 010825.txt,01/08/2025,Daily Lot 1&2,source=Meeting Minutes Daily Lot1&2 010825.txt | date_str=01/08/2025 | Meeting_type=Daily Lot 1&2,0
+1,What was discussed about e net testing in the dailies,3,e63153632dbd4e9afcbd9054ddffea600,Meeting Minutes Daily Lot1 & 2 070825.txt,07/08/2025,Daily Lot 1&2,source=Meeting Minutes Daily Lot1 & 2 070825.txt | date_str=07/08/2025 | Meeting_type=Daily Lot 1&2,0
+1,What was discussed about e net testing in the dailies,4,f7900aca48f040b892ca5b5e25abd5cd,Meeting Minutes Daily Lot1&2 010825.txt,01/08/2025,Daily Lot 1&2,source=Meeting Minutes Daily Lot1&2 010825.txt | date_str=01/08/2025 | Meeting_type=Daily Lot 1&2,0
+1,What was discussed about e net testing in the dailies,5,e12f165a86034e7f8469bd384ffea600,Meeting Minutes Daily Lot1+2 300725.txt,30/07/2025,Daily Lot 1&2,source=Meeting Minutes Daily Lot1+2 300725.txt | date_str=30/07/2025 | Meeting_type=Daily Lot 1&2,0
